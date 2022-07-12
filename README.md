@@ -1,4 +1,4 @@
-# Muzilla-Music-Player
+# Muzilla Music Player
 Simple Music Player for Love of Music
 
 
