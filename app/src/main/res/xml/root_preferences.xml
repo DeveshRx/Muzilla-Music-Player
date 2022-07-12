@@ -1,0 +1,14 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <Preference
+        app:title="Version"
+        app:summary="@string/app_version_name"/>
+    <Preference
+        app:title="Build Number"
+        app:summary="@string/app_version_code"/>
+    <Preference
+        app:title="Made with &#128153; in India"
+        />
+
+</PreferenceScreen>

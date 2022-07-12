@@ -1,0 +1,155 @@
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
+}
+
+android {
+    signingConfigs {
+        release {
+            keyAlias project.config_keySignAlias
+            keyPassword project.config_keySignAliasPassword
+            storeFile file(project.config_keySignFile)
+            storePassword project.config_keySignPassword
+        }
+    }
+    buildFeatures {
+        viewBinding true
+    }
+
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "devesh.app"
+        minSdk 21
+        targetSdk 32
+        versionCode project.app_VersionCode
+        versionName project.app_VersionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+
+
+    }
+
+    buildTypes {
+        debug{
+            applicationIdSuffix ".debug"
+
+            debuggable true
+
+            minifyEnabled false
+            shrinkResources false
+            // SPEEDUP BUILD
+            ext.enableCrashlytics = false
+            ext.alwaysUpdateBuildId = false
+
+            // Google Services JSON
+  /*          resValue "string", "google_app_id", "\"" + "API_KEY1" + "\""
+            resValue "string", "gcm_defaultSenderId", "\"" + "API_KEY1" + "\""
+            resValue "string", "default_web_client_id", "\"" + "API_KEY1" + "\""
+            resValue "string", "ga_trackingId", "\"" + "API_KEY1" + "\""
+            resValue "string", "firebase_database_url", "\"" + "API_KEY1" + "\""
+            resValue "string", "google_crash_reporting_api_key", "\"" + "API_KEY1" + "\""
+            resValue "string", "project_id", "\"" + "API_KEY1" + "\""
+*/
+            resValue "string", "app_version_code", "\"" + project.app_VersionCode + "\""
+            resValue "string", "app_version_name", "\"" + project.app_VersionName+" (Debug)" + "\""
+
+        }
+        release {
+            applicationIdSuffix ".music"
+
+            minifyEnabled true
+            shrinkResources true
+
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            // Google Services JSON
+  /*          resValue "string", "google_app_id", "\"" + "API_KEY1" + "\""
+            resValue "string", "gcm_defaultSenderId", "\"" + "API_KEY1" + "\""
+            resValue "string", "default_web_client_id", "\"" + "API_KEY1" + "\""
+            resValue "string", "ga_trackingId", "\"" + "API_KEY1" + "\""
+            resValue "string", "firebase_database_url", "\"" + "API_KEY1" + "\""
+            resValue "string", "google_crash_reporting_api_key", "\"" + "API_KEY1" + "\""
+            resValue "string", "project_id", "\"" + "API_KEY1" + "\""
+*/
+
+            resValue "string", "app_version_code", "\"" + project.app_VersionCode + "\""
+            resValue "string", "app_version_name", "\"" + project.app_VersionName + "\""
+
+            signingConfig signingConfigs.release
+
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    // SPEED UP ANDROID STUDIO !
+    dexOptions {
+        incremental true
+    }
+    lint {
+        checkReleaseBuilds false
+    }
+    namespace 'devesh.app'
+}
+
+dependencies {
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation project(path: ':database')
+    implementation project(path: ':common')
+
+    implementation "androidx.appcompat:appcompat:$project.appcompat_version"
+    implementation "com.google.android.material:material:$project.material_version"
+    implementation "androidx.constraintlayout:constraintlayout:$project.constraintlayout_version"
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    // Firebase
+    implementation platform('com.google.firebase:firebase-bom:30.1.0')
+    implementation 'com.google.firebase:firebase-analytics'
+
+
+    // Room Database
+    implementation "androidx.room:room-runtime:$project.room_version"
+    annotationProcessor "androidx.room:room-compiler:$project.room_version"
+    // optional - RxJava2 support for Room
+    implementation "androidx.room:room-rxjava2:$project.room_version"
+    // optional - RxJava3 support for Room
+    implementation "androidx.room:room-rxjava3:$project.room_version"
+    // optional - Guava support for Room, including Optional and ListenableFuture
+    implementation "androidx.room:room-guava:$project.room_version"
+    // optional - Test helpers
+   // testImplementation "androidx.room:room-testing:$room_version"
+    // optional - Paging 3 Integration
+    //implementation "androidx.room:room-paging:2.4.1"
+
+    //Glide
+    implementation "com.github.bumptech.glide:glide:$project.glide_version"
+    annotationProcessor "com.github.bumptech.glide:compiler:$project.glide_version"
+
+    //Exo Player
+    implementation "com.google.android.exoplayer:exoplayer:$project.exo_player_version"
+    implementation "com.google.android.exoplayer:extension-mediasession:$project.exo_player_version"
+
+
+    // Shared Preferences
+    implementation "androidx.preference:preference:$project.shared_pref_version"
+
+// GSON
+    implementation "com.google.code.gson:gson:$project.gson_version"
+
+    // Fragment
+    implementation "androidx.fragment:fragment:$project.fragment_version"
+
+    // WorkManager
+    implementation "androidx.work:work-runtime:$project.workmanager_version"
+
+    // Permissions
+  //  implementation "com.nabinbhandari.android:permissions:$project.permission_version"
+    implementation "com.github.Redman1037:Android-Permissions:$project.permission_version"
+
+
+}

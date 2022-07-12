@@ -1,0 +1,9 @@
+package devesh.app.utils;
+
+import devesh.app.database.MusicMain.Music;
+
+public class NowPlaying {
+   // public boolean isPlaying=false;
+   // public Music music=new Music();
+
+}

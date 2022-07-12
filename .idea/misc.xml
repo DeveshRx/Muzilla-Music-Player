@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Dev_Projects/Project-Music/android-app/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Dev_Projects/Project-Music/android-app/app/src/main/res/layout/activity_now_playing.xml" value="0.15942028985507245" />
+        <entry key="..\:/Dev_Projects/Project-Music/android-app/app/src/main/res/layout/appbar.xml" value="0.15760869565217392" />
+        <entry key="..\:/Dev_Projects/Project-Music/android-app/app/src/main/res/layout/fragment_album_details.xml" value="0.13592233009708737" />
+        <entry key="..\:/Dev_Projects/Project-Music/android-app/app/src/main/res/layout/fragment_album_list.xml" value="0.25" />
+        <entry key="..\:/Dev_Projects/Project-Music/android-app/app/src/main/res/layout/fragment_artist_ui.xml" value="0.18" />
+        <entry key="..\:/Dev_Projects/Project-Music/android-app/app/src/main/res/layout/fragment_home.xml" value="0.12228260869565218" />
+        <entry key="..\:/Dev_Projects/Project-Music/android-app/app/src/main/res/layout/fragment_player.xml" value="0.15942028985507245" />
+        <entry key="..\:/Dev_Projects/Project-Music/android-app/app/src/main/res/layout/fragment_songs_list_details.xml" value="0.15760869565217392" />
+        <entry key="..\:/Dev_Projects/Project-Music/android-app/app/src/main/res/layout/mini_player.xml" value="0.33" />
+        <entry key="..\:/Dev_Projects/Project-Music/android-app/app/src/main/res/layout/notification_layout.xml" value="0.25" />
+        <entry key="..\:/Dev_Projects/Project-Music/android-app/app/src/main/res/layout/now_playing.xml" value="0.2" />
+        <entry key="..\:/Dev_Projects/Project-Music/android-app/app/src/main/res/layout/recycleview_item_album_song_list.xml" value="0.33" />
+        <entry key="..\:/Dev_Projects/Project-Music/android-app/app/src/main/res/layout/recycleview_item_music_album.xml" value="0.33" />
+        <entry key="..\:/Dev_Projects/Project-Music/android-app/app/src/main/res/menu/main_menu.xml" value="0.14285714285714285" />
+        <entry key="..\:/Dev_Projects/Project-Music/android-app/app/src/main/res/menu/main_mmenu.xml" value="0.1703125" />
+        <entry key="..\:/Dev_Projects/Project-Music/android-app/app/src/main/res/menu/navbar_menu_home.xml" value="0.13402061855670103" />
+        <entry key="..\:/Dev_Projects/Project-Music/android-app/app/src/main/res/xml/root_preferences.xml" value="0.3262279888785913" />
+        <entry key="..\:/Dev_Projects/Project-Music/android-app/common/src/main/res/drawable/album-48px.xml" value="0.16" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

@@ -1,0 +1,244 @@
+package devesh.app.adapters;
+
+import android.content.ContentUris;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.MediaStore;
+import android.util.Log;
+import android.util.Size;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import androidx.annotation.RequiresApi;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.io.IOException;
+import java.util.List;
+
+import devesh.app.Constants;
+import devesh.app.MainActivity;
+import devesh.app.R;
+import devesh.app.database.MusicMain.Music;
+
+
+public class MusicLibraryAdapter extends RecyclerView.Adapter<MusicLibraryAdapter.ViewHolder> {
+    public String TAG = "MusicLibraryAdapter";
+    public List<Music> localDataSet;
+    public String ADAPTER_MODE;
+    public Constants constants = new Constants();
+
+    public MusicLibraryAdapter(List<Music> dataSet, String MODE) {
+        localDataSet = dataSet;
+        ADAPTER_MODE = MODE;
+    }
+
+    // Create new views (invoked by the layout manager)
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        // Create a new view, which defines the UI of the list item
+        View view = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.recycleview_item_music_album, viewGroup, false);
+
+        return new ViewHolder(view);
+    }
+
+
+    @Override
+    public void onBindViewHolder(ViewHolder viewHolder, int position) {
+
+        // Get element from your dataset at this position and replace the
+        // contents of the view with that element
+        try {
+
+            String mTitle = "";
+            String mSubTitle = "";
+            if (ADAPTER_MODE.equals(constants.ADAPTER_MODE_ALBUM)) {
+                mTitle = localDataSet.get(position).Album_Title;
+                mSubTitle = localDataSet.get(position).Album_Artist;
+            } else if (ADAPTER_MODE.equals(constants.ADAPTER_MODE_SONGS)) {
+                mTitle = localDataSet.get(position).Song_Title;
+                mSubTitle = localDataSet.get(position).Album_Artist;
+            }else if(ADAPTER_MODE.equals(constants.ADAPTER_MODE_ARTIST) ){
+                mTitle = localDataSet.get(position).Album_Artist;
+                mSubTitle =null;
+            }else if(ADAPTER_MODE.equals(constants.ADAPTER_MODE_GENRE)){
+                mTitle = localDataSet.get(position).Genre;
+                mSubTitle = null;
+            }
+
+
+            viewHolder.getMusicTitle().setText(mTitle);
+            if(mSubTitle!=null){
+                viewHolder.getMusicArtist().setText(mSubTitle);
+            }else{
+                viewHolder.getMusicArtist().setVisibility(View.GONE);
+            }
+
+            viewHolder.getLLItem().setTag(position);
+
+
+//viewHolder.getAlbumArtimageView().setImageBitmap(viewHolder.getAlbumArt(Uri.parse(localDataSet.get(position).ContentUri)));
+
+            viewHolder.getAlbumArtimageView().setImageBitmap(viewHolder.getAlbumArtwork(localDataSet.get(position).Album_ID));
+
+            viewHolder.getLLItem().setOnClickListener(view -> {
+                String id = view.getTag().toString();
+                Log.d(TAG, "onClick: music selected  " + id);
+              //  String pid = localDataSet.get(Integer.parseInt(id)).Song_ID;
+Music mMusic=localDataSet.get(Integer.parseInt(id));
+                if (viewHolder.getView().getContext() instanceof MainActivity) {
+                    ((MainActivity) viewHolder.getView().getContext()).SelectItem(mMusic,ADAPTER_MODE);
+                }
+            });
+
+
+    /*
+            viewHolder.getMusicTitle().setText(localDataSet.get(position).Title);
+            //viewHolder.getMusicDesc().setText(localDataSet.get(position).desc);
+            viewHolder.getMusicDesc().setVisibility(View.GONE);
+            viewHolder.getMusicTime().setText(localDataSet.get(position).duration);
+
+            viewHolder.getLLMusic().setTag(position);
+            //viewHolder.getdownloadIMG().setTag(position);
+            viewHolder.getdownloadIMG().setVisibility(View.GONE);
+
+            viewHolder.getplayIMG().setTag(position);
+
+            viewHolder.getLLMusic().setOnClickListener(view -> {
+                String id = view.getTag().toString();
+                Log.d(TAG, "onClick: LLMusic " + id);
+                String pid = localDataSet.get(Integer.parseInt(id)).PodcastID;
+
+                if (viewHolder.getView().getContext() instanceof HomeActivity) {
+                    ((HomeActivity) viewHolder.getView().getContext()).PlayPodcastMusic(pid, localDataSet.get(Integer.parseInt(id)));
+                }
+            });
+*/
+        } catch (Exception e) {
+            Log.e(TAG, "onBindViewHolder: #53645645 " + e);
+        }
+    }
+
+    // Return the size of your dataset (invoked by the layout manager)
+    @Override
+    public int getItemCount() {
+        return localDataSet.size();
+    }
+
+
+    /**
+     * Provide a reference to the type of views that you are using
+     * (custom ViewHolder).
+     */
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        private final TextView MusicTitle;
+        private final TextView MusicArtist;
+        private final ImageView AlbumArtimageView;
+        //private final CardView MusicCardView;
+        private final LinearLayout LLItem;
+        private final View mView;
+        public String TAG = "MusicLibAdapter";
+
+        public ViewHolder(View view) {
+            super(view);
+            mView = view;
+            // Define click listener for the ViewHolder's View
+  /*          view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Log.d(TAG, "onClick: " + v.getTag().toString() + "\nID:" + v.getId());
+                    Log.d(TAG, "onClick: ");
+
+                    String id = v.getTag().toString();
+                    Log.d(TAG, "onClick: " + id);
+
+
+                    // Log.d(TAG, "Element " + getAdapterPosition() + " clicked.");
+
+
+                }
+            });
+*/
+
+  /*          LLMusic.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Log.d(TAG, "onClick: " + v.getTag().toString() + "\nID:" + v.getId());
+                    String id = v.getTag().toString();
+                    Log.d(TAG, "onClick: LLMusic " + id);
+
+                }
+            });
+            downloadIMG.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Log.d(TAG, "onClick: " + v.getTag().toString() + "\nID:" + v.getId());
+                    String id = v.getTag().toString();
+                    Log.d(TAG, "onClick: downloadIMG " + id);
+                }
+            });
+            playIMG.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Log.d(TAG, "onClick: " + v.getTag().toString() + "\nID:" + v.getId());
+                    String id = v.getTag().toString();
+                    Log.d(TAG, "onClick: playIMG" + id);
+                }
+            });
+*/
+
+            MusicTitle = view.findViewById(R.id.NametextView);
+            MusicArtist = view.findViewById(R.id.ArtistTextView2);
+            AlbumArtimageView = view.findViewById(R.id.AlbumArtimageView);
+            //   MusicCardView = view.findViewById(R.id.MusicCardView);
+            LLItem = view.findViewById(R.id.LLItem);
+
+
+        }
+
+        public TextView getMusicTitle() {
+            return MusicTitle;
+        }
+
+        public TextView getMusicArtist() {
+            return MusicArtist;
+        }
+
+        public ImageView getAlbumArtimageView() {
+            return AlbumArtimageView;
+        }
+
+        public LinearLayout getLLItem() {
+            return LLItem;
+        }
+
+
+        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+        private Bitmap getAlbumArtwork(String album_Id) throws IOException {
+
+            long albumId = Long.parseLong(album_Id);
+            Uri contentUri = ContentUris.withAppendedId(
+                    MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI,
+                    albumId
+            );
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                return mView.getContext().getApplicationContext().getContentResolver().loadThumbnail(contentUri, new Size(640, 480), null);
+            } else {
+                return null;
+            }
+        }
+
+        public View getView() {
+            return mView;
+        }
+
+    }
+
+
+}
